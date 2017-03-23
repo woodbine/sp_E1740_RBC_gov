@@ -97,9 +97,9 @@ soup = BeautifulSoup(html, 'lxml')
 
 blocks = soup.find_all('div', attrs = {'class':'col-sm-6'})
 for block in blocks:
-    title = block.find('div', 'inner2').text.strip()
+    title = block.find('span', 'inner-cell').text.strip()
     try:
-        link = block.find('ul', 'dropdown-menu').find('li').find_next('li').find('a', href=True)
+        link = block.find('div', 'inner-cell').find_all('a', href=True)[-1]
         if '.csv' in link['href'] or '.xlsx' in link['href'] or '.xls' in link['href']:
             url = link['href']
             csvYr = title.split()[-1][-4:]
